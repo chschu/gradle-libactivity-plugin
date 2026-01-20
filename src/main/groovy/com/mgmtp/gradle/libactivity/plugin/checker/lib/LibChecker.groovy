@@ -95,8 +95,8 @@ class LibChecker {
 
     private void tagLibViaSonatypeQuery( Lib lib) {
         LOGGER.info( "Checking lib '{}' via Sonatype API.", lib)
-        String query =  "q=g:\"${ lib.coordinates.groupId}\"+AND+a:\"${ lib.coordinates.artifactId}\"&core=gav&rows=100&wt=json"
-        String encodedUrl = encodeAsHttpsUrl( 'search.maven.org', '/solrsearch/select', query)
+        String query = "q=g:${ lib.coordinates.groupId} AND a:${ lib.coordinates.artifactId}&rows=100&wt=json&sort=v desc"
+        String encodedUrl = encodeAsHttpsUrl( 'central.sonatype.com', '/solrsearch/select', query)
         LOGGER.debug{ GENERIC_REQUEST_LOG.call( encodedUrl)}
         try {
             Object jsonObject = getConnectionContentAsJsonObject( encodedUrl)
@@ -266,7 +266,7 @@ class LibChecker {
                 LOGGER.error{ GENERIC_INVALID_RESPONSE_LOG.call( responseCode, lib, encodedUrl)}
                 throw new IllegalStateException( httpStatusException.getMessage( ))
             case 404:
-                if( encodedUrl.contains( 'search.maven.org')) {
+                if( encodedUrl.contains( 'central.sonatype.com')) {
                     LOGGER.info{ GENERIC_INVALID_RESPONSE_LOG.call( responseCode, lib, encodedUrl)}
                     lib.tags.add( LibTag.UNKNOWN)
                 }
