@@ -8,7 +8,7 @@ Add the plugin to your project's `build.gradle` using:
 
 ```groovy
 plugins {
-  id 'com.mgmtp.gradle-libactivity-plugin' version '1.0.0'
+  id 'com.mgmtp.gradle-libactivity-plugin' version '2.0.0'
 }
 ```
 
@@ -18,7 +18,7 @@ Alternatively you can check out the plugin's code. To connect it with your proje
 includeBuild( "${ pathToCheckedOutPluginProject}")
 ```
 
-**Compatibility Note:** This plugin was developed and tested using Gradle `6.7.1`. It might be possible to apply it to a project built by a lower version of Gradle but no guarantee or warranty is given that it will work.
+**Compatibility Note:** This plugin was developed and tested using Gradle `9.2.1`. It might be possible to apply it to a project built by a lower version of Gradle but no guarantee or warranty is given that it will work.
 
 ## `checkLibActivity` Task
 

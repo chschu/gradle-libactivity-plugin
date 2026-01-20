@@ -9,14 +9,15 @@ import groovy.transform.options.Visibility
 import org.gradle.testkit.runner.BuildResult
 import org.gradle.testkit.runner.GradleRunner
 import org.gradle.testkit.runner.TaskOutcome
-import org.junit.Rule
-import org.junit.rules.TemporaryFolder
 import spock.lang.Specification
+import spock.lang.TempDir
+
+import java.nio.file.Path
 
 class LibActivityPluginFunctionalTest extends Specification {
 
-    @Rule
-    TemporaryFolder temporaryFolder = new TemporaryFolder( )
+    @TempDir
+    Path temporaryFolder
 
     File testProjectDir
 
@@ -33,7 +34,8 @@ class LibActivityPluginFunctionalTest extends Specification {
     static final String NEWLINE = System.lineSeparator( )
 
     void setup( ) {
-        testProjectDir = temporaryFolder.newFolder( 'test')
+        testProjectDir = temporaryFolder.resolve( 'test').toFile( )
+        testProjectDir.mkdirs( )
     }
 
     /**
